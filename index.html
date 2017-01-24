@@ -13,18 +13,47 @@
 
   <body ng-controller="ToDoCtrl">
 
-    <table class="table">
-      <tr>
-        <th>Text</th>
-        <th>Due Date</th>
-        <th>Completed</th>
-      </tr>
-      <tr ng-repeat="item in items">
-        <td>{{ item.text }}</td>
-        <td>{{ item.dueDate }}</td>
-        <td><input type="checkbox" ng-checked="{{ item.completed }}"></td>
-      </tr>
-    </table>
+    <div class="container">
+
+      <div class="row">
+        <div class="col-xs-12">
+          <form name="newToDo" ng-submit="addToDo(newToDo)">
+            <div class="form-group">
+              <label>Task</label>
+              <input type="text" class="form-control" ng-model="formData.text" required>
+            </div>
+            <div class="form-group">
+              <label>Due Date</label>
+              <input type="date" class="form-control" ng-model="formData.dueDate" required>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Create To-Do">
+          </form>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <table class="table">
+            <tr>
+              <th></th>
+              <th>Text</th>
+              <th>Due Date</th>
+              <th>Completed</th>
+            </tr>
+            <tr ng-repeat="item in items">
+              <td><a href="#" ng-click="removeToDo($index)">X</a></td>
+              <td>{{ item.text }}</td>
+              <td>{{ item.dueDate | date:'yyyy-MM-dd' }}</td>
+              <td><input type="checkbox" ng-model="item.completed"></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+      </div>
+
+    </div>
 
   </body>
 
